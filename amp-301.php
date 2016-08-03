@@ -44,6 +44,14 @@ function amp_301_redirect()
 		return false;
 	}
 
+	$from = array_keys($redirects);
+
+	array_walk($from, function (&$item) {
+		$item = '/' . trim($item, '/') . '/';
+	});
+
+	$redirects = array_combine($from, $redirects);
+
 	$slug = '/' . implode('/', $parts) . '/';
 
 	if (array_key_exists($slug, $redirects)) {
